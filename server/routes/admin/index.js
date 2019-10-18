@@ -15,6 +15,14 @@ module.exports = (app) => {
     res.send(model);
   });
 
+  //删除分类
+  router.delete('/categories/:id', async (req, res) => {
+    await Category.findByIdAndDelete(req.params.id);
+    res.send({
+      success: true
+    });
+  });
+
   //获取分类列表
   router.get('/categories', async (req, res) => {
     const items = await Category.find().limit(10);
