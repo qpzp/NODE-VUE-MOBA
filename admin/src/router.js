@@ -15,6 +15,10 @@ import ItemList from './views/ItemList.vue';
 import HeroEdit from './views/HeroEdit.vue';
 import HeroList from './views/HeroList.vue';
 
+//文章
+import ArticleEdit from './views/ArticleEdit.vue';
+import ArticleList from './views/ArticleList.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -24,6 +28,7 @@ export default new Router({
       name: 'main',
       component: Main,
       children: [
+
         //分类
         {path: '/categories/create', component: CategoryEdit},
         {path: '/categories/edit/:id', component: CategoryEdit, props: true},
@@ -38,6 +43,11 @@ export default new Router({
         {path: '/heroes/create', component: HeroEdit},
         {path: '/heroes/edit/:id', component: HeroEdit, props: true},
         {path: '/heroes/list', component: HeroList},
+
+        //文章
+        {path: '/articles/create', component: ArticleEdit},
+        {path: '/articles/edit/:id', component: ArticleEdit, props: true},
+        {path: '/articles/list', component: ArticleList},
       ]
     },
   ]
