@@ -1,22 +1,25 @@
 module.exports = (app) => {
   const express = require('express');
+  const jwt = require('jsonwebtoken');
+  const AdminUser = require('../../models/AdminUser');
+
   const router = express.Router({
     mergeParams: true
   });
 
-  //创建分类
+  //创建资源
   router.post('/', async (req, res) => {
     const model = await req.Model.create(req.body);
     res.send(model);
   });
 
-  //更新分类
+  //更新资源
   router.put('/:id', async (req, res) => {
     const model = await req.Model.findByIdAndUpdate(req.params.id, req.body);
     res.send(model);
   });
 
-  //删除分类
+  //删除资源
   router.delete('/:id', async (req, res) => {
     await req.Model.findByIdAndDelete(req.params.id);
     res.send({
@@ -24,8 +27,15 @@ module.exports = (app) => {
     });
   });
 
-  //获取分类列表
-  router.get('/', async (req, res) => {
+  //获取资源列表
+  router.get('/', async (req, res, next) => {
+    const token = String(req.headers.authorization || '').split(' ').pop();
+
+    const {id} = jwt.verify(token, app.get('secret'));
+    req.user = await AdminUser.findById(id);
+    console.log(req.user);
+    await next();
+  }, async (req, res) => {
     const queryOptions = {};
     if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent';
@@ -34,7 +44,7 @@ module.exports = (app) => {
     res.send(items);
   });
 
-  //根据id获取分类详情
+  //根据id获取资源详情
   router.get('/:id', async (req, res) => {
     const model = await req.Model.findById(req.params.id);
     res.send(model);
@@ -60,7 +70,6 @@ module.exports = (app) => {
   app.post('/admin/api/login', async (req, res) => {
     const {username, password} = req.body;
     //根据用户名找用户
-    const AdminUser = require('../../models/AdminUser');
     const user = await AdminUser.findOne({username}).select('+password');
     if (!user) {
       return res.status(422).send({
@@ -77,7 +86,6 @@ module.exports = (app) => {
     }
 
     //返回token
-    const jwt = require('jsonwebtoken');
     const token = jwt.sign({id: user._id}, app.get('secret'));
     return res.send({token});
 
