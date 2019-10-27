@@ -47,6 +47,7 @@ module.exports = (app) => {
     next();
   }, router);
 
+  //上传
   const multer = require('multer');
   const upload = multer({dest: __dirname + '/../../uploads'});
   app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
@@ -54,4 +55,22 @@ module.exports = (app) => {
     file.url = `http://localhost:3000/uploads/${file.filename}`;
     res.send(file);
   });
+
+  //登录
+  app.post('/admin/api/login', async (req, res) => {
+    const {username, password} = req.body;
+    //根据用户名找用户
+    const AdminUser = require('../../models/AdminUser');
+    const user = await AdminUser.findOne({username});
+    if (!user) {
+      return res.status(422).send({
+        message: '用户不存在'
+      });
+    }
+    //校验密码
+    //返回token
+
+  });
 };
+
+
