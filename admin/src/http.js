@@ -8,7 +8,7 @@ const http = axios.create({
 http.interceptors.response.use(res => {
   return res;
 }, err => {
-  if (errr.response.data.message) {
+  if (err.response.data.message) {
     Vue.prototype.$message({
       type: 'error',
       message: err.response.data.message
