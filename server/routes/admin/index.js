@@ -8,6 +8,12 @@ module.exports = (app) => {
     mergeParams: true
   });
 
+  //登录校验中间件
+  const authMiddle = require('../../middleware/auth');
+
+  //模型获取中间件
+  const resourceMiddle =require('../../middleware/resource')
+
   //创建资源
   router.post('/', async (req, res) => {
     const model = await req.Model.create(req.body);
@@ -29,16 +35,7 @@ module.exports = (app) => {
   });
 
   //获取资源列表
-  router.get('/', async (req, res, next) => {
-    const token = String(req.headers.authorization || '').split(' ').pop();
-    assert(token, 401, '请先登录'); //请提供jwt token
-    const {id} = jwt.verify(token, app.get('secret'));
-    assert(id, 401, '请先登录'); //无效的jwt token
-    req.user = await AdminUser.findById(id);
-    assert(req.user, 401, '请先登录');
-
-    await next();
-  }, async (req, res) => {
+  router.get('/', async (req, res) => {
     const queryOptions = {};
     if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent';
@@ -54,16 +51,12 @@ module.exports = (app) => {
   });
 
 
-  app.use('/admin/api/rest/:resource', async (req, res, next) => {
-    const modelName = require('inflection').classify(req.params.resource);
-    req.Model = require(`../../models/${modelName}`);
-    next();
-  }, router);
+  app.use('/admin/api/rest/:resource', authMiddle(), resourceMiddle(), router);
 
   //上传
   const multer = require('multer');
   const upload = multer({dest: __dirname + '/../../uploads'});
-  app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
+  app.post('/admin/api/upload', authMiddle(), upload.single('file'), async (req, res) => {
     const file = req.file;
     file.url = `http://localhost:3000/uploads/${file.filename}`;
     res.send(file);
