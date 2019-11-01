@@ -77,6 +77,10 @@ $font-sizes: (
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 $flex-jc: (
   start: flex-start,
   end: flex-end,
@@ -186,6 +190,25 @@ $spacing-sizes: (
     &.active {
       border-bottom: 3px solid map_get($colors, 'white');
     }
+  }
+}
+
+//sprite
+.sprite {
+  background: url("../images/index.png") no-repeat 0 0;
+  background-size: 28.8462rem;
+  display: inline-block;
+
+  &.sprite-news {
+    width: 1.7692rem;
+    height: 1.5385rem;
+    background-position: 63.546% 15.517%;
+  }
+
+  &.sprite-arrow {
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
   }
 
 }
