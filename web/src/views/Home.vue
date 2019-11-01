@@ -28,6 +28,8 @@
         <span>收起</span>
       </div>
     </div>
+<!--    end of nav-icons-->
+    <i class="iconfont icon-menu"></i>
   </div>
 </template>
 

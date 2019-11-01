@@ -1,0 +1,37 @@
+{
+  "id": "1488701",
+  "name": "王者荣耀",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1201273",
+      "name": "book",
+      "font_class": "book",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "1608363",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "8816386",
+      "name": "menu",
+      "font_class": "menu1",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "11286136",
+      "name": "helmet-battle",
+      "font_class": "helmet-battle",
+      "unicode": "e910",
+      "unicode_decimal": 59664
+    }
+  ]
+}
