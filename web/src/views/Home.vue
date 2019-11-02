@@ -28,8 +28,39 @@
         <span>收起</span>
       </div>
     </div>
-<!--    end of nav-icons-->
-    <i class="iconfont icon-menu"></i>
+    <!--    end of nav-icons-->
+
+    <m-card icon="menu" title="新闻资讯">
+      <swiper>
+        <swiper-slide v-for="m in 5" :key="m">
+          <div class="py-2" v-for="n in 5" :key="n">
+            <span>[新闻]</span>
+            <span>|</span>
+            <span>11月1日“演员”惩罚名单</span>
+            <span>11/01</span>
+          </div>
+        </swiper-slide>
+      </swiper>
+    </m-card>
+
+    <m-card icon="helmet-battle" title="英雄列表"></m-card>
+    <m-card icon="helmet-battle" title="精彩视频"></m-card>
+    <m-card icon="book" title="图文攻略"></m-card>
+
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+    <p>lorem</p>
+
   </div>
 </template>
 
@@ -66,6 +97,7 @@
   .nav-icons {
     border-top: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
+
     .nav-item {
       width: 25%;
       border-right: 1px solid $border-color;
