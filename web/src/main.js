@@ -17,6 +17,10 @@ import Card from './components/Card';
 
 Vue.component('m-card', Card);
 
+import ListCard from "./components/ListCard";
+
+Vue.component('m-list-card', ListCard);
+
 new Vue({
   router,
   render: h => h(App)

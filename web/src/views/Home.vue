@@ -30,37 +30,49 @@
     </div>
     <!--    end of nav-icons-->
 
-    <m-card icon="menu" title="新闻资讯">
-      <div class="nav jc-between">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
+    <!--    <m-card icon="menu" title="新闻资讯">-->
+    <!--      <div class="nav jc-between">-->
+    <!--        <div class="nav-item active">-->
+    <!--          <div class="nav-link">热门</div>-->
+    <!--        </div>-->
+    <!--        <div class="nav-item">-->
+    <!--          <div class="nav-link">新闻</div>-->
+    <!--        </div>-->
+    <!--        <div class="nav-item">-->
+    <!--          <div class="nav-link">公告</div>-->
+    <!--        </div>-->
+    <!--        <div class="nav-item">-->
+    <!--          <div class="nav-link">活动</div>-->
+    <!--        </div>-->
+    <!--        <div class="nav-item">-->
+    <!--          <div class="nav-link">赛事</div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="pt-3">-->
+    <!--        <swiper>-->
+    <!--          <swiper-slide v-for="m in 5" :key="m">-->
+    <!--            <div class="py-2" v-for="n in 5" :key="n">-->
+    <!--              <span>[新闻]</span>-->
+    <!--              <span>|</span>-->
+    <!--              <span>11月1日“演员”惩罚名单</span>-->
+    <!--              <span>11/01</span>-->
+    <!--            </div>-->
+    <!--          </swiper-slide>-->
+    <!--        </swiper>-->
+    <!--      </div>-->
+    <!--    </m-card>-->
+
+    <m-list-card icon="menu" title="新闻资讯" :categories="newsCats">
+      <template #items="{category}">
+        <div class="py-2" v-for="(news,i) in category.newsList" :key="i">
+          <span>{{news.categoryName}}</span>
+          <span>|</span>
+          <span>{{news.title}}</span>
+          <span>{{news.date}}</span>
         </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">公告</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">活动</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">赛事</div>
-        </div>
-      </div>
-      <div class="pt-3">
-        <swiper>
-          <swiper-slide v-for="m in 5" :key="m">
-            <div class="py-2" v-for="n in 5" :key="n">
-              <span>[新闻]</span>
-              <span>|</span>
-              <span>11月1日“演员”惩罚名单</span>
-              <span>11/01</span>
-            </div>
-          </swiper-slide>
-        </swiper>
-      </div>
-    </m-card>
+      </template>
+    </m-list-card>
+
 
     <m-card icon="helmet-battle" title="英雄列表"></m-card>
     <m-card icon="helmet-battle" title="精彩视频"></m-card>
@@ -93,6 +105,58 @@
             el: '.pagination-home'
           }
         },
+        newsCats: [
+          {
+            name: '热门',
+            newsList: new Array(5).fill({}).map(v => (
+              {
+                categoryName: '公告',
+                title: '11月1日“演员”惩罚名单',
+                date: '11/01'
+              }
+            ))
+          },
+          {
+            name: '新闻',
+            newsList: new Array(5).fill({}).map(v => (
+              {
+                categoryName: '新闻',
+                title: '11月1日“演员”惩罚名单',
+                date: '11/01'
+              }
+            ))
+          },
+          {
+            name: '公告',
+            newsList: new Array(5).fill({}).map(v => (
+              {
+                categoryName: '公告',
+                title: '11月1日“演员”惩罚名单',
+                date: '11/01'
+              }
+            ))
+          },
+          {
+            name: '活动',
+            newsList: new Array(5).fill({}).map(v => (
+              {
+                categoryName: '活动',
+                title: '11月1日“演员”惩罚名单',
+                date: '11/01'
+              }
+            ))
+          },
+          {
+            name: '赛事',
+            newsList: new Array(5).fill({}).map(v => (
+              {
+                categoryName: '赛事',
+                title: '11月1日“演员”惩罚名单',
+                date: '11/01'
+              }
+            ))
+          },
+        ]
       };
     }
   };
