@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex ai-center topbar bg-black py-2 text-white px-3">
+    <div class="topbar d-flex ai-center topbar bg-black py-2 text-white px-3">
       <img src="../assets/logo.png" alt="" height="30">
       <div class="px-2 fs-xss flex-1">
         <div class="text-white">王者荣耀</div>
@@ -30,6 +30,10 @@
   export default {};
 </script>
 
-<style>
-
+<style lang="scss">
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
 </style>
