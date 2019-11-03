@@ -194,6 +194,7 @@ $spacing-sizes: (
   display: flex;
 
   .nav-item {
+    cursor: pointer;
     border-bottom: 3px solid transparent;
     padding-bottom: 0.2rem;
 

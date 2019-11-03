@@ -358,5 +358,47 @@ module.exports = app => {
 
   });
 
+  //英雄列表
+  router.get('/heroes/list', async (req, res) => {
+    // const parent = await Category.findOne({
+    //   name: '新闻分类'
+    // }).populate({
+    //   path: 'children',
+    //   populate: {
+    //     path: 'newsList',
+    //   }
+    // }).lean();
+
+    //找到父类
+    const parent = await Category.findOne({
+      name: '英雄分类'
+    });
+
+    //category关联hero模型
+    const cats = await Category.aggregate([
+      {$match: {parent: parent._id}},
+      {
+        $lookup: {
+          from: 'heroes',
+          localField: '_id',
+          foreignField: 'categories',
+          as: 'heroList'
+        }
+      },
+    ]);
+
+    //子类id集合
+    const subCats = cats.map(v => v._id);
+
+    cats.unshift({
+      name: '热门',
+      heroList: await Hero.find().where({
+        categories: {$in: subCats}
+      }).limit(10).lean()
+    });
+
+    res.send(cats);
+  });
+
   app.use('/web/api', router);
 };
