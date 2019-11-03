@@ -7,6 +7,7 @@ module.exports = app => {
   const Article = mongoose.model('Article');
   const Category = mongoose.model('Category');
 
+  //导入新闻数据
   router.get('/news/init', async (req, res) => {
 
     const parent = await Category.findOne({
@@ -35,6 +36,7 @@ module.exports = app => {
 
   });
 
+  //新闻列表
   router.get('/news/list', async (req, res) => {
     // const parent = await Category.findOne({
     //   name: '新闻分类'
@@ -87,6 +89,11 @@ module.exports = app => {
     });
 
     res.send(cats);
+  });
+
+  //导入英雄数据
+  router.get('/news/heroes', async (req, res) => {
+
   });
 
   app.use('/web/api', router);
