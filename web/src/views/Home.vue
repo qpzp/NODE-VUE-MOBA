@@ -64,11 +64,11 @@
 
     <m-list-card icon="menu" title="新闻资讯" :categories="newsCats">
       <template #items="{category}">
-        <div class="py-2" v-for="(news,i) in category.newsList" :key="i">
-          <span>{{news.categoryName}}</span>
-          <span>|</span>
-          <span>{{news.title}}</span>
-          <span>{{news.date}}</span>
+        <div class="py-2 fs-lg d-flex" v-for="(news,i) in category.newsList" :key="i">
+          <span class="text-info">{{news.categoryName}}</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{news.title}}</span>
+          <span class="text-grey fs-sm">{{news.createdAt | date}}</span>
         </div>
       </template>
     </m-list-card>
@@ -96,8 +96,14 @@
 </template>
 
 <script>
+  import dayjs from 'dayjs';
 
   export default {
+    filters: {
+      date(val) {
+        return dayjs(val).format('MM/DD');
+      }
+    },
     data() {
       return {
         swiperOption: {
@@ -106,58 +112,28 @@
           }
         },
         newsCats: [
-          {
-            name: '热门',
-            newsList: new Array(5).fill({}).map(v => (
-              {
-                categoryName: '公告',
-                title: '11月1日“演员”惩罚名单',
-                date: '11/01'
-              }
-            ))
-          },
-          {
-            name: '新闻',
-            newsList: new Array(5).fill({}).map(v => (
-              {
-                categoryName: '新闻',
-                title: '11月1日“演员”惩罚名单',
-                date: '11/01'
-              }
-            ))
-          },
-          {
-            name: '公告',
-            newsList: new Array(5).fill({}).map(v => (
-              {
-                categoryName: '公告',
-                title: '11月1日“演员”惩罚名单',
-                date: '11/01'
-              }
-            ))
-          },
-          {
-            name: '活动',
-            newsList: new Array(5).fill({}).map(v => (
-              {
-                categoryName: '活动',
-                title: '11月1日“演员”惩罚名单',
-                date: '11/01'
-              }
-            ))
-          },
-          {
-            name: '赛事',
-            newsList: new Array(5).fill({}).map(v => (
-              {
-                categoryName: '赛事',
-                title: '11月1日“演员”惩罚名单',
-                date: '11/01'
-              }
-            ))
-          },
+          // {
+          //   name: '新闻',
+          //   newsList: new Array(5).fill({}).map(v => (
+          //     {
+          //       categoryName: '新闻',
+          //       title: '11月1日“演员”惩罚名单',
+          //       date: '11/01'
+          //     }
+          //   ))
+          // },
         ]
       };
+    },
+    methods: {
+      async fetchNewsCats() {
+        const res = await this.$http.get('news/list');
+        this.newsCats = res.data;
+      }
+    },
+
+    created() {
+      this.fetchNewsCats();
     }
   };
 </script>

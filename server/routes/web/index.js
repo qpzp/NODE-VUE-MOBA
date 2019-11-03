@@ -67,6 +67,7 @@ module.exports = app => {
     ]);
 
     const subCats = cats.map(v => v._id);
+    console.log(subCats);
 
     cats.unshift({
       name: '热门',
