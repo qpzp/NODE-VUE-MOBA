@@ -191,7 +191,26 @@ $spacing-sizes: (
   border-radius: 0.1538rem;
   font-size: map_get($font-sizes, 'sm') * $base-font-size;
   padding: 0.2rem 0.6rem;
+
+  &.btn-lg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      color: map_get($colors, 'primary');
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-right: 0.5rem;
+    }
+
+    background: map_get($colors, 'white-1');
+    border: 1px solid map_get($colors, 'white-2');
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
 }
+
 
 //nav
 .nav {

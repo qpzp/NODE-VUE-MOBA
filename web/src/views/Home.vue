@@ -94,21 +94,6 @@
         </div>
       </template>
     </m-list-card>
-
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-    <p>lorem</p>
-
   </div>
 </template>
 
