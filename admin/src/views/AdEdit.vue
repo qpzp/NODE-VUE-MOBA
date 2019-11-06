@@ -7,7 +7,7 @@
       </el-form-item>
 
       <el-form-item label="广告">
-        <el-button size="small" @click="model.items.push({})"><i class="el-icon-plus">添加广告</i></el-button>
+        <el-button size="small" v-if="model" @click="model.items.push({})"><i class="el-icon-plus">添加广告</i></el-button>
         <el-row type="flex" style="flex-wrap: wrap">
           <el-col :md="24" v-for="(item,index) in model.items" :key="index">
             <el-form-item label="跳转链接">
@@ -45,7 +45,9 @@
     },
     data() {
       return {
-        model: {},
+        model: {
+          items:[]
+        },
         items: []
       };
     },
